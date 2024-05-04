@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-staging
+  namespace: argocd
+spec:
+  destination:
+    namespace: staging
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: microservice
+    repoURL: https://charts.ruan.dev
+    targetRevision: 3.1.1
+    helm:
+      values: |
+        replicaCount: 1
+        env:
+          vars:
+            APP_TITLE: "staging"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

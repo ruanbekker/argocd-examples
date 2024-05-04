@@ -1,0 +1,5 @@
+example-app:
+  replicaCount: 1
+  env:
+    vars:
+      APP_TITLE: "dev"

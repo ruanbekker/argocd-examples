@@ -1,0 +1,5 @@
+example-app:
+  replicaCount: 2
+  env:
+    vars:
+      APP_TITLE: "staging"

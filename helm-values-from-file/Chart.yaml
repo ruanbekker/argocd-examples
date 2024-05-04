@@ -1,0 +1,10 @@
+apiVersion: v2
+name: example-app
+description: demo helm chart
+type: application
+version: 3.1.1
+appVersion: "1.0.0"
+dependencies:
+- name: microservice
+  version: 3.1.1
+  repository: https://charts.ruan.dev

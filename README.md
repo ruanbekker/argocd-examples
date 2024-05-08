@@ -16,6 +16,7 @@ To follow along Argo CD needs to be installed.
 
 - [helm-files-inside-applications](#helm-values-inside-application)
 - [helm-values-from-file](#helm-values-from-file)
+- [git-and-list-generators](#git-and-list-generators)
 
 ### helm-values-inside-application
 
@@ -48,3 +49,15 @@ The application is defined in `helm-values-from-file/apps/app-dev.yaml` and the 
       valueFiles:
       - values-dev.yaml
 ```
+
+### git-and-list-generators
+
+<code style="color : aqua">Jump</code> to directory: [./git-and-list-generators/](./helm-values-from-file/)
+
+The application is defined in `git-and-list-generators/multiple-git-tags-application.yaml` and listens for applications in `apps/` and does the following:
+
+For staging:
+- If the commit tag is `staging` it will append a `staging-` prefix to the name and deploy to the `staging` namespace in the `kind-staging` cluster.
+
+For production:
+- If the commit tag is `production` it will append a `prod-` prefix to the name and deploy to the `prod` namespace in the `kind-prod` cluster.

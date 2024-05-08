@@ -12,6 +12,8 @@ To follow along Argo CD needs to be installed.
 >kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 >```
 
+Or if you need a kubernetes cluster, gitea and argocd on a kind cluster you can check out: `_scripts/bootstrap.sh`
+
 ## Examples
 
 - [helm-files-inside-applications](#helm-values-inside-application)
@@ -52,7 +54,7 @@ The application is defined in `helm-values-from-file/apps/app-dev.yaml` and the 
 
 ### git-and-list-generators
 
-<code style="color : aqua">Jump</code> to directory: [./git-and-list-generators/](./helm-values-from-file/)
+<code style="color : aqua">Jump</code> to directory: [./git-and-list-generators/](./git-and-list-generators/)
 
 The application is defined in `git-and-list-generators/multiple-git-tags-application.yaml` and listens for applications in `apps/` and does the following:
 

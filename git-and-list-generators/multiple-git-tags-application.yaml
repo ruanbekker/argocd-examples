@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: multi-branch-applications
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+        - list:
+            elements:
+              - namePrefix: "staging-"
+                branch: "staging"
+                namespace: "staging"
+                clusterName: "kind-staging"
+              - namePrefix: "prod-"
+                branch: "production" # branches or tags need to exist before the time
+                namespace: "prod"
+                clusterName: "kind-prod"
+        - git:
+            repoURL: https://github.com/ruanbekker/argocd-examples.git
+            revision: "{{branch}}"
+            directories:
+              - path: apps/*
+  template:
+    metadata:
+      name: '{{namePrefix}}{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/ruanbekker/argocd-examples.git
+        targetRevision: '{{branch}}'
+        path: '{{path}}'
+      destination:
+        name: '{{clusterName}}'
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - allowEmpty=true
+        - CreateNamespace=true

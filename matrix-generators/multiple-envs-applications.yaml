@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: multi-env-applications
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/ruanbekker/argocd-examples.git
+      revision: HEAD
+      directories:
+      - path: "apps/*/values"
+      - path: apps/hello-world
+        exclude: true
+  - matrix:
+      generators:
+      - git:
+          repoURL: https://github.com/ruanbekker/argocd-examples.git
+          revision: HEAD
+          files:
+          - path: "apps/*/values/*.yaml"
+      - list:
+          elements:
+          - env: dev
+          - env: staging
+          - env: production
+  template:
+    metadata:
+      # Generate app names like "order-service-dev"
+      name: '{{path[1]}}-{{env}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/ruanbekker/argocd-examples.git
+        targetRevision: HEAD
+        # Path points to the chart directory
+        path: 'apps/{{path[1]}}'
+        helm:
+          releaseName: '{{path[1]}}-{{env}}'
+          valueFiles:
+          - values/{{env}}.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{env}}'
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - allowEmpty=true
+        - CreateNamespace=true

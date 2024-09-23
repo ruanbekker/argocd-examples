@@ -1,0 +1,7 @@
+product-service:
+  name: "product-service-dev"
+  replicaCount: 1
+  podLabels:
+    env: "dev"
+    appname: "product-service"
+

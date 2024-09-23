@@ -20,6 +20,7 @@ Or if you need a kubernetes cluster, gitea and argocd on a kind cluster you can 
 - [helm-values-from-file](#helm-values-from-file)
 - [git-and-list-generators](#git-and-list-generators)
   - [multiple-tags](#multiple-tags)
+- [matrix-generators](#matrix-generators)
   - [multiple-environment-value-files](#multiple-environment-value-files)
 
 ### helm-values-inside-application
@@ -68,9 +69,12 @@ For staging:
 For production:
 - If the commit tag is `production` it will append a `prod-` prefix to the name and deploy to the `prod` namespace in the `kind-prod` cluster.
 
+
+### matrix-generators
+
 #### multiple-environment-value-files
 
-<code style="color : aqua">Jump</code> to directory: [./git-and-list-generators/](./git-and-list-generators/)
+<code style="color : aqua">Jump</code> to directory: [./matrix-generators/](./matrix-generators/)
 
 The ApplicationSet is defined in `git-and-list-generators/multiple-envs-applications.yaml` and listens for applications under the `apps/` directory in the git repository. It uses a `git generator` to discover application directories and a `matrix generator` to combine the application paths with environment-specific configurations (dev, staging, production). 
 

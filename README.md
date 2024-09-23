@@ -19,6 +19,8 @@ Or if you need a kubernetes cluster, gitea and argocd on a kind cluster you can 
 - [helm-files-inside-applications](#helm-values-inside-application)
 - [helm-values-from-file](#helm-values-from-file)
 - [git-and-list-generators](#git-and-list-generators)
+  - [multiple-tags](#multiple-tags)
+  - [multiple-environment-value-files](#multiple-environment-value-files)
 
 ### helm-values-inside-application
 
@@ -54,6 +56,8 @@ The application is defined in `helm-values-from-file/apps/app-dev.yaml` and the 
 
 ### git-and-list-generators
 
+#### multiple-tags
+
 <code style="color : aqua">Jump</code> to directory: [./git-and-list-generators/](./git-and-list-generators/)
 
 The application is defined in `git-and-list-generators/multiple-git-tags-application.yaml` and listens for applications in `apps/` and does the following:
@@ -63,3 +67,13 @@ For staging:
 
 For production:
 - If the commit tag is `production` it will append a `prod-` prefix to the name and deploy to the `prod` namespace in the `kind-prod` cluster.
+
+#### multiple-environment-value-files
+
+<code style="color : aqua">Jump</code> to directory: [./git-and-list-generators/](./git-and-list-generators/)
+
+The ApplicationSet is defined in `git-and-list-generators/multiple-envs-applications.yaml` and listens for applications under the `apps/` directory in the git repository. It uses a `git generator` to discover application directories and a `matrix generator` to combine the application paths with environment-specific configurations (dev, staging, production). 
+
+For each environment (dev, staging, production), it deploys the corresponding environment-specific values.yaml file using Helm. The deployments are targeted to the appropriate Kubernetes namespaces (dev, staging, production), and the ApplicationSet automatically handles synchronization, pruning, and namespace creation.
+
+

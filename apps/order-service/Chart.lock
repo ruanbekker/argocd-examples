@@ -1,0 +1,6 @@
+dependencies:
+- name: common-service
+  repository: file://../../charts/common-service
+  version: 0.1.0
+digest: sha256:c834fd75ea161239c5b7569e9dd6208e7fecd9e2aa7a2d696b90acc06bdcdb04
+generated: "2024-09-20T00:23:05.2666348+02:00"

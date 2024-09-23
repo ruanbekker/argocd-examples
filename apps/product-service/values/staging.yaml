@@ -1,0 +1,6 @@
+product-service:
+  name: "product-service-staging"
+  replicaCount: 2
+  podLabels:
+    env: "staging"
+    appname: "product-service"

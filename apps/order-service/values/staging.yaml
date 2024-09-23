@@ -1,0 +1,7 @@
+order-service:
+  name: "order-service-staging"
+  replicaCount: 2
+  podLabels:
+    env: "staging"
+    appname: "order-service"
+

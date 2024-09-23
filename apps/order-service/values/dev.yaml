@@ -1,0 +1,6 @@
+order-service:
+  name: "order-service-dev"
+  replicaCount: 2
+  podLabels:
+    env: "dev"
+    appname: "order-service"

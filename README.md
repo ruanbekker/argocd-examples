@@ -1,7 +1,7 @@
 # argocd-examples
 Argo CD Examples
 
-## Argo CD
+## Argo CD Deployment
 
 To follow along Argo CD needs to be installed.
 
@@ -12,7 +12,13 @@ To follow along Argo CD needs to be installed.
 >kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 >```
 
-Or if you need a kubernetes cluster, gitea and argocd on a kind cluster you can check out: `_scripts/bootstrap.sh`
+### Deployment using Terraform
+
+If you need a Kind Kubernetes Cluster and ArgoCD Deployed, you can look at: [server-deployment/terraform](./server-deployment/terraform/README.md)
+
+### Deployment with Bash and Extras
+
+If you need a kubernetes cluster, gitea and argocd on a kind cluster you can check out: `_scripts/bootstrap.sh`
 
 ## Examples
 
